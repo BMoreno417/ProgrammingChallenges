@@ -8,6 +8,7 @@ FROM marketing_data
 GROUP BY date
 ORDER BY date;
 
+
 --- Question 2 The third best state generated 37577
 SELECT 
     state, 
@@ -29,6 +30,7 @@ FROM campaign_info camp
 	LEFT JOIN website_revenue web ON camp.id = web.campaign_id
 GROUP BY name;
 
+
 --- Question 4
 SELECT 
 	right(geo, 2) AS state,
@@ -37,6 +39,7 @@ FROM campaign_info camp
 RIGHT JOIN marketing_data mk ON camp.id = mk.campaign_id
 WHERE camp.name = 'Campaign5'
 GROUP BY geo;
+
 
 --- Question 5
 --- In my opinion, campaign 3 was the most efficient because it made the most revenue. Other factors are that campaign
@@ -53,3 +56,13 @@ where camp.id = mk.campaign_id
 AND camp.id = web.campaign_id
 GROUP BY camp.name
 order by sum(web.revenue) desc;
+
+
+--- Question 6
+--- The best day of the week to run ads based on revenue is Monday then Tuesday.
+SELECT
+    DATENAME(WEEKDAY, date) as day,
+    sum(revenue) as total_revenue
+from website_revenue
+group by DATENAME(WEEKDAY, date)
+order by sum(revenue) desc
