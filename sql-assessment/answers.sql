@@ -45,7 +45,10 @@ GROUP BY geo;
 SELECT 
 	camp.name, 
 	sum(web.revenue) AS total_revenue
-FROM campaign_info camp, marketing_data mk,	website_revenue web
+FROM 
+    campaign_info camp, 
+    marketing_data mk,	
+    website_revenue web
 where camp.id = mk.campaign_id
 AND camp.id = web.campaign_id
 GROUP BY camp.name
